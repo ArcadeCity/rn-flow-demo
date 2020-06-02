@@ -129,11 +129,7 @@ async function authenticate() {
             resolve(snapshot1)
         }
 
-        console.log('Waiting 1 second...')
-        setTimeout(() => {
-            console.log('Simulating message...')
-            simulateMessage({ data: simulatedData })
-        }, 1000)
+        return simulateMessage({ data: simulatedData })
     })
 }
 
