@@ -1111,10 +1111,8 @@
     "@onflow/types" "0.0.1"
     queue-microtask "1.1.2"
 
-"@onflow/fcl@^0.0.35":
+"@onflow/fcl@file:./packages/fcl":
   version "0.0.35"
-  resolved "https://registry.npmjs.org/@onflow/fcl/-/fcl-0.0.35.tgz#3aa03ba6e5ab1aa42290cdab457acc8756eb803d"
-  integrity sha512-S3YA1EC4s6jEc+P5BgBg0YH7mxFa5+LH5toczFK2lT9uI246lKkEOPo8zgkEouD7miM51UUuRPasZ5p/GYuCDA==
   dependencies:
     "@onflow/sdk" "0.0.21"
     "@onflow/types" "0.0.1"
