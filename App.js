@@ -1,5 +1,6 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import 'node-libs-react-native/globals'
+import { Button, StyleSheet, Text, View } from 'react-native'
 import * as fcl from '@onflow/fcl'
 
 fcl.config().put('challenge.handshake', '<http://localhost:8701/flow/authenticate>')
@@ -7,7 +8,8 @@ fcl.config().put('challenge.handshake', '<http://localhost:8701/flow/authenticat
 export default function App() {
     return (
         <View style={styles.container}>
-            <Text>Open up App.js to start working on your app!</Text>
+            <Text>Test FCL auth:</Text>
+            <Button onPress={() => fcl.authenticate()} title="Sign In/Up" />
         </View>
     )
 }
