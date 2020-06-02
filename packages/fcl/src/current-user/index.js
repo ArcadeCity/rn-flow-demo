@@ -86,11 +86,27 @@ async function authenticate() {
             l6n: window.location.origin
         })
 
-        window.addEventListener('message', async ({ data, origin }) => {
+        // Instead of re-implementing the event listener in RN, let's just
+        // simulate the data that might be passed from the iframe
+
+        const simulatedData = {
+            type: 'FCL::CHALLENGE::RESPONSE',
+            addr: '0000000000000000000000000000000000000004',
+            paddr: 'asdf8701',
+            code: '4d7e3f65-7d1c-49dd-97d8-537ba6aa462b',
+            exp: '1591742214881',
+            hks: 'http://192.168.1.132:8701/flow/hooks',
+            nonce: 'asdf',
+            l6n: null
+        }
+
+        const simulateMessage = async ({ data, origin }) => {
             if (data.type !== CHALLENGE_RESPONSE_EVENT) return
             unrender()
             const url = new URL(data.hks)
             url.searchParams.append('code', data.code)
+
+            console.log('using url:', url)
 
             const user = await fetch(url, {
                 method: 'GET',
@@ -99,16 +115,51 @@ async function authenticate() {
                 }
             }).then((d) => d.json())
 
+            console.log('user:', user)
+
             send(NAME, SET_CURRENT_USER, {
                 ...user,
                 cid: compositeIdFromProvider(user.provider),
                 loggedIn: true,
                 verified: true
             })
-            resolve(await snapshot())
-        })
+
+            const snapshot1 = await snapshot()
+            console.log('Snapshot:', snapshot1)
+            resolve(snapshot1)
+        }
+
+        console.log('Waiting 1 second...')
+        setTimeout(() => {
+            console.log('Simulating message...')
+            simulateMessage({ data: simulatedData })
+        }, 1000)
     })
 }
+
+//     window.addEventListener('message', async ({ data, origin }) => {
+//         if (data.type !== CHALLENGE_RESPONSE_EVENT) return
+//         unrender()
+//         const url = new URL(data.hks)
+//         url.searchParams.append('code', data.code)
+
+//         const user = await fetch(url, {
+//             method: 'GET',
+//             headers: {
+//                 'Content-Type': 'application/json'
+//             }
+//         }).then((d) => d.json())
+
+//         send(NAME, SET_CURRENT_USER, {
+//             ...user,
+//             cid: compositeIdFromProvider(user.provider),
+//             loggedIn: true,
+//             verified: true
+//         })
+//         resolve(await snapshot())
+//     })
+// })
+// }
 
 function unauthenticate() {
     spawnCurrentUser()
