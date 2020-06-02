@@ -5,7 +5,8 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "dev:wallet": "PK=2cc675f283f6d28ca1547d6a505e653f8245f197b79eac5a8c59fdabae3bc181 fcl-wallet"
   },
   "dependencies": {
     "@onflow/fcl": "^0.0.35",
