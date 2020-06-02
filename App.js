@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import 'node-libs-react-native/globals'
-import { Button, Image, StyleSheet, Text, View, YellowBox } from 'react-native'
+import { Button, Image, StatusBar, StyleSheet, Text, View, YellowBox } from 'react-native'
 import * as fcl from '@onflow/fcl'
+// import { SvgUri } from 'react-native-svg'
 
 fcl.config().put('challenge.handshake', '<http://localhost:8701/flow/authenticate>')
 
@@ -16,22 +17,35 @@ export default function App() {
 
     return (
         <View style={styles.container}>
+            <StatusBar backgroundColor="blue" barStyle="dark-content" />
             {user ? (
                 <>
-                    <Text style={{ fontSize: 24, marginBottom: 20 }}>Authed!</Text>
-                    {/* <Text style={{ marginVertical: 10 }}>Name: {user.identity.name ?? 'null'}</Text> */}
-                    <Text>Cover: </Text>
+                    <Text style={{ fontWeight: 'bold', fontSize: 24, marginBottom: 20 }}>
+                        Authed with Flow!
+                    </Text>
+                    <Text style={{ marginVertical: 10 }}>Provider: {user.provider.name}</Text>
+                    <Text style={{ marginVertical: 10 }}>Addr: {user.provider.addr}</Text>
+                    <Text style={{ marginVertical: 10 }}>Name: {user.identity.name ?? 'null'}</Text>
+                    <Text style={{ marginVertical: 10, color: user.identity.color }}>
+                        Color: {user.identity.color}
+                    </Text>
+                    <Text style={{ marginVertical: 10 }}>Cover: </Text>
                     <Image
                         source={{ uri: user.identity.cover }}
-                        style={{ width: '100%', height: 300, marginVertical: 20 }}
+                        style={{ width: '100%', height: 300, marginVertical: 10 }}
                     />
-                    <Text>Avatar:</Text>
+                    {/* <Text>Avatar:</Text> */}
+                    {/* This would work if it wasn't an SVG
                     <Image
                         source={{ uri: user.identity.avatar }}
                         style={{ width: 150, height: 150, marginVertical: 20 }}
-                    />
-
-                    <Text style={{ color: user.identity.color }}>Color: {user.identity.color}</Text>
+                    /> */}
+                    {/* And this works for most SVGs but not the default avatar from onflow.org for some reason
+                    <SvgUri
+                        width="150"
+                        height="150"
+                        uri={user.identity.avatar}
+                    /> */}
                 </>
             ) : (
                 <>
