@@ -2,6 +2,8 @@
 
 Minimum demo similar to the official [quickstart](https://github.com/onflow/flow-js-sdk/tree/master/packages/fcl#quick-start) with a few hacks to work in React Native.
 
+![Screenshot](screenshot.png)
+
 Hacks:
 
 1. Adds [node-libs-react-native](https://github.com/parshap/node-libs-react-native) to polyfill the 'http' module expected by [@onflow/send](https://www.npmjs.com/package/@onflow/send)
@@ -23,7 +25,3 @@ const simulatedData = {
 }
 ```
 If testing on a device and not an emulator, replace 192.168.1.132 with your localhost IP. Remember it needs to be on the same wifi network where your dev wallet is running. If using an emulator you should be able to replace that IP with just 'localhost'.
-
----
-
-![Screenshot](screenshot.jpg)
