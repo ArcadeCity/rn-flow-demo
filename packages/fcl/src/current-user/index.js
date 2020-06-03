@@ -95,7 +95,7 @@ async function authenticate() {
             paddr: 'asdf8701',
             code: '4d7e3f65-7d1c-49dd-97d8-537ba6aa462b',
             exp: '1591742214881',
-            hks: 'http://192.168.1.132:8701/flow/hooks',
+            hks: 'http://192.168.1.132:8701/flow/hooks', // TODO: Replace with your localhost IP
             nonce: 'asdf',
             l6n: null
         }
